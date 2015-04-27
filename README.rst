@@ -16,6 +16,9 @@ In order to make this extension work you will need those CSS and JavaScript libr
 
 This can be achieved e.g. by installing the `bootstrap_package <http://typo3.org/extensions/repository/view/bootstrap_package>`_
 
+`Demo`_
+
 
 .. _Faster Youtube embeds: http://www.sitepoint.com/faster-youtube-embeds-javascript/
+.. _Demo: http://effet.info/journal/video-url-replace/
 

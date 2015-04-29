@@ -48,7 +48,8 @@ class tx_brtvideourlreplace {
 				// replace matching parts
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 				$replacement = '<div class="youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"></div>';
-				$replacement.= '<img class="visible-print" src="http://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg">';
+				$videoTitle = json_decode(file_get_contents("https://gdata.youtube.com/feeds/api/videos/".$match[6]."?v=2&alt=json&fields=title"),true);
+				$replacement.= '<img class="visible-print" src="http://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['entry']['title']['$t'].'">';
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
 		}
@@ -63,7 +64,7 @@ class tx_brtvideourlreplace {
 				// replace matching parts
 				$pattern='#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?'.$match[5].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 				$replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[5].'" data-thumb-large="'.$videoDetail[0]['thumbnail_large'] .'" data-thumb-medium="'.$videoDetail[0]['thumbnail_medium'].'"></div>';
-				$replacement.= '<img class="visible-print" src="'.$videoDetail[0]['thumbnail_large'] .'">';
+				$replacement.= '<img class="visible-print" src="'.$videoDetail[0]['thumbnail_large'] .'" alt="Vimeo Video: '.$videoDetail[0]['title'].'">';
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
 		}		
@@ -79,7 +80,7 @@ class tx_brtvideourlreplace {
 				// replace matching parts
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?'.$match[5].'(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#';
 				$replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
-				$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'">';
+				$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'" alt="Dailymotion Video: '.$videoDetail->title.'">';
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
 		}

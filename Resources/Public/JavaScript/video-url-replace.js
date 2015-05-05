@@ -42,8 +42,8 @@ $(function() {
 	
 	$(".dailymotion").each(function() {
 		// set the videothumbnail as background
-		// thumb-large if width > 200 else medium
-		if ($(this).width() > 200) var img_src = $(this).data("thumb-large");
+		// thumb-large if width > 340 else medium
+		if ($(this).width() > 340) var img_src = $(this).data("thumb-large");
 		else	var img_src = $(this).data("thumb-medium");
 		$(this).css('background-image', 'url(' + img_src + ')');
 

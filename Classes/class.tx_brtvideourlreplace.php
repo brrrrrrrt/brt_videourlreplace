@@ -42,7 +42,7 @@ class tx_brtvideourlreplace {
 		
 		// Youtube
 		$matches = array();
-		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?([a-zA-Z0-9]*)(&.*|\?.*|/.*)?(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
+		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// replace matching parts
@@ -56,7 +56,7 @@ class tx_brtvideourlreplace {
 		
 		// vimeo
 		$matches = array();
-		preg_match_all('#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?([a-zA-Z0-9]*)(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
+		preg_match_all('#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// fetch thumbnail URL from Vimeo API
@@ -71,7 +71,7 @@ class tx_brtvideourlreplace {
 		
 		// Dailymotion
 		$matches = array();
-		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?([a-zA-Z0-9]*)(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
+		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// fetch thumbnail URLs from Dailymotion API:

@@ -16,6 +16,7 @@ ChangeLog
 =======  =========================================================================================================================
 Version  Changes
 =======  =========================================================================================================================
+1.0.5   - [BUGFIX] add "-_" to the regex to support video ids containing slashes and underscores
 1.0.4		- [BUGFIX] set the backgroundsize to cover instead of 100% to avoid 1px gap in some cases
 
 1.0.3		- adjust dailymotion breakpoint for thumbnails

@@ -48,8 +48,8 @@ class tx_brtvideourlreplace {
 				// replace matching parts
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 				$replacement = '<div class="youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"></div>';
-				$videoTitle = json_decode(file_get_contents("https://gdata.youtube.com/feeds/api/videos/".$match[6]."?v=2&alt=json&fields=title"),true);
-				$replacement.= '<img class="visible-print" src="http://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['entry']['title']['$t'].'">';
+				$videoTitle = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title))&part=snippet"),true);
+				$replacement.= '<img class="visible-print" src="http://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['items'][0]['snippet']['title'].'">';
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
 		}

@@ -1,2 +1,5 @@
-page.includeCSS.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/Css/video-url-replace.css
-page.includeJSFooterlibs.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/JavaScript/video-url-replace.js
+
+[globalVar = LIT:1 > {$plugin.brt_videourl_replace.thumbnail.disable}]
+	page.includeCSS.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/Css/video-url-replace.css
+	page.includeJSFooterlibs.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/JavaScript/video-url-replace.js
+[global]

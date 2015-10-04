@@ -1,0 +1,14 @@
+############################
+### CUSTOM SUBCATEGORIES ###
+###########################
+# customsubcategory=100=Video URL replace Settings
+
+#####################
+### Configuration ###
+#####################
+plugin.brt_videourl_replace {
+    thumbnail {
+            # cat=Video URL replace Settings: basic/100/100; type=boolean; label=Disable Thumbnails 
+            disable = 0
+    }
+}

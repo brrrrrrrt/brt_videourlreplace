@@ -16,6 +16,7 @@ ChangeLog
 =======  =========================================================================================================================
 Version  Changes
 =======  =========================================================================================================================
+1.0.8   - [BUGFIX] TYPO3 V7.5 compatibility issue
 1.0.7   - [FEATURE] via constants configurable option to disable thumbnails to just use plain responsive iframes
 
 	- set V7.x compatibility

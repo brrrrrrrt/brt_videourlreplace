@@ -2,11 +2,13 @@ Extension Manual
 ================
 
 Requirements:
-	- jQuery
+	- jQuery (if thumbnails are not deactivated via constants which is the default)
 	- Bootstrap 3
 
 This extension uses Bootstrap 3 classes for responsive video thumbnails and iframes.
-The video thumbnails are replaced using jQuery selectors. 
+The video thumbnails are replaced using jQuery selectors.
+
+The thumbnail-feature can be disabled via constants editor. In this mode the Video URLs are directly replaced by the appropriate responsive iframe. jQuery is not used in this case and the JS code will not be included.
 
 based on: `Faster Youtube embeds`_
 

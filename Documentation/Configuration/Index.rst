@@ -16,7 +16,6 @@ Configuration Reference
 - you can disable the use of thumbnails via contants editor or by adding:
 
     plugin.brt_videourl_replace.thumbnail.disable = 1
-
 to your contants
 
 (when thumbnails are disabled, URLs get replaced directly by iframes, no additional CSS or jQuery is used - in this case the static template inclusion in your root template will have no effect)

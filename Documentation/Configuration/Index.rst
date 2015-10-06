@@ -21,7 +21,6 @@ Configuration Reference
 (when thumbnails are disabled, URLs get replaced directly by iframes, no additional CSS or jQuery is used - in this case the static template inclusion in your root template will have no effect)
 
 
-Target group: **Developers**
 
 
 .. _configuration-typoscript:

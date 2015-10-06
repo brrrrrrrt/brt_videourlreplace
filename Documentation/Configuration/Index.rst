@@ -30,7 +30,7 @@ TypoScript Reference
 
 Constants:
 
-plugin.brt_videourl_replace.thumbnail.disable = 1
+	plugin.brt_videourl_replace.thumbnail.disable = 1
 
 
 

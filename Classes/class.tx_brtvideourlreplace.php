@@ -67,19 +67,20 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(?!user)(?!tag)(?!categories)(?!channels)(?!groups)(video/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
-				// search pattern
-				$pattern='#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?'.$match[5].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
-
 				// fetch Video Details from Vimeo API
 				$videoDetail = unserialize(file_get_contents("http://vimeo.com/api/v2/video/".$match[5].".php"));
+				if (is_array($videoDetail)) {
+					// search pattern
+					$pattern='#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?'.$match[5].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';				
 
-				// iframe if thumbnail is disabled
-				if ($disableThumbnail) $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://player.vimeo.com/video/'.$match[5].'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
-				else $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[5].'" data-thumb-large="'.$videoDetail[0]['thumbnail_large'] .'" data-thumb-medium="'.$videoDetail[0]['thumbnail_medium'].'"></div>';
-				// thumbnail for printing
-				$replacement.= '<img class="visible-print" src="'.$videoDetail[0]['thumbnail_large'] .'" alt="Vimeo Video: '.$videoDetail[0]['title'].'">';
-				// replace matching parts
-				$this->content = preg_replace($pattern, $replacement, $this->content);
+					// iframe if thumbnail is disabled
+					if ($disableThumbnail) $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://player.vimeo.com/video/'.$match[5].'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
+					else $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[5].'" data-thumb-large="'.$videoDetail[0]['thumbnail_large'] .'" data-thumb-medium="'.$videoDetail[0]['thumbnail_medium'].'"></div>';
+					// thumbnail for printing
+					$replacement.= '<img class="visible-print" src="'.$videoDetail[0]['thumbnail_large'] .'" alt="Vimeo Video: '.$videoDetail[0]['title'].'">';
+					// replace matching parts
+					$this->content = preg_replace($pattern, $replacement, $this->content);
+				}
 			}
 		}		
 		
@@ -88,20 +89,24 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?([a-zA-Z0-9-_]*)(?!/featured)(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
-				// search pattern
-				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?'.$match[5].'(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#';
-
 				// fetch Video Details from Dailymotion API:
 				$videoDetail = json_decode(file_get_contents("https://api.dailymotion.com/video/".$match[5]));
-				$videoThumbnails=json_decode(file_get_contents("https://api.dailymotion.com/video/".$videoDetail->id."?fields=thumbnail_large_url,thumbnail_url"));
+				if (is_object($videoDetail)) {
+					
+					$videoThumbnails=json_decode(file_get_contents("https://api.dailymotion.com/video/".$videoDetail->id."?fields=thumbnail_large_url,thumbnail_url"));
 
-				// iframe if thumbnail is disabled
-				if ($disableThumbnail) $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="http://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
-				else $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
-				// thumbnail for printing
-				$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'" alt="Dailymotion Video: '.$videoDetail->title.'">';
-				// replace matching parts
-				$this->content = preg_replace($pattern, $replacement, $this->content);
+					// search pattern
+					$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?'.$match[5].'(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#';
+
+
+					// iframe if thumbnail is disabled
+					if ($disableThumbnail) $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="http://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
+					else $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
+					// thumbnail for printing
+					$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'" alt="Dailymotion Video: '.$videoDetail->title.'">';
+					// replace matching parts
+					$this->content = preg_replace($pattern, $replacement, $this->content);
+				}
 			}
 		}
 		

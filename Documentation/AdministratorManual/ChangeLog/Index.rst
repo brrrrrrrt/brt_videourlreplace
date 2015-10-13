@@ -17,6 +17,7 @@ ChangeLog
 Version  Changes
 =======  =========================================================================================================================
 1.1.0	- [TASK] enhance channel/user detection using API for vimeo and dailymotion
+
 1.0.9	- [BUGFIX] adopt regular expressions to ignore channels etc.
 
 1.0.8   - [BUGFIX] TYPO3 V7.5 compatibility issue

@@ -50,8 +50,8 @@ class tx_brtvideourlreplace {
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 
 				// iframe if thumbnail is disabled
-				if ($disableThumbnail) $replacement = '<div class="youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
-				else $replacement = '<div class="youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"></div>';
+				if ($disableThumbnail) $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
+				else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"></div>';
 
 				// fetch Video Title
 				$videoTitle = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title))&part=snippet"),true);
@@ -74,8 +74,8 @@ class tx_brtvideourlreplace {
 					$pattern='#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?'.$match[5].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';				
 
 					// iframe if thumbnail is disabled
-					if ($disableThumbnail) $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://player.vimeo.com/video/'.$match[5].'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
-					else $replacement = '<div class="vimeo embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[5].'" data-thumb-large="'.$videoDetail[0]['thumbnail_large'] .'" data-thumb-medium="'.$videoDetail[0]['thumbnail_medium'].'"></div>';
+					if ($disableThumbnail) $replacement = '<div class="vurpl-vimeo embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://player.vimeo.com/video/'.$match[5].'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
+					else $replacement = '<div class="vurpl-vimeo embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[5].'" data-thumb-large="'.$videoDetail[0]['thumbnail_large'] .'" data-thumb-medium="'.$videoDetail[0]['thumbnail_medium'].'"></div>';
 					// thumbnail for printing
 					$replacement.= '<img class="visible-print" src="'.$videoDetail[0]['thumbnail_large'] .'" alt="Vimeo Video: '.$videoDetail[0]['title'].'">';
 					// replace matching parts
@@ -100,8 +100,8 @@ class tx_brtvideourlreplace {
 
 
 					// iframe if thumbnail is disabled
-					if ($disableThumbnail) $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="http://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
-					else $replacement = '<div class="dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
+					if ($disableThumbnail) $replacement = '<div class="vurpl-dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="http://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
+					else $replacement = '<div class="vurpl-dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
 					// thumbnail for printing
 					$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'" alt="Dailymotion Video: '.$videoDetail->title.'">';
 					// replace matching parts

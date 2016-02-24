@@ -1,6 +1,6 @@
 "use strict";
 $(function() {
-	$(".youtube").each(function() {
+	$(".vurpl-youtube").each(function() {
 		// set the videothumbnail as background
 		// maxresdefault if width > 640 else sddefault
 		if ($(this).width() > 640) $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg)');
@@ -19,7 +19,7 @@ $(function() {
 
 		});
 	});
-	$(".vimeo").each(function() {
+	$(".vurpl-vimeo").each(function() {
 		// set the videothumbnail as background
 		// thumb-large if width > 200 else medium
 		if ($(this).width() > 200) var img_src = $(this).data("thumb-large");
@@ -40,7 +40,7 @@ $(function() {
 		});
 	});
 	
-	$(".dailymotion").each(function() {
+	$(".vurpl-dailymotion").each(function() {
 		// set the videothumbnail as background
 		// thumb-large if width > 340 else medium
 		if ($(this).width() > 340) var img_src = $(this).data("thumb-large");

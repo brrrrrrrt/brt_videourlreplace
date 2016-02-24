@@ -18,7 +18,7 @@ Version  Changes
 =======  =========================================================================================================================
 1.1.1	- [TASK] changed classnames to somthing less common:
 
-	.youtube -> .vurpl-youtube, .vimeo -> vurpl-vimeo, .dailymotion -> .vurpl-dailymotion
+	- .youtube -> .vurpl-youtube, .vimeo -> vurpl-vimeo, .dailymotion -> .vurpl-dailymotion
 
 
 1.1.0	- [TASK] enhance channel/user detection using API for vimeo and dailymotion

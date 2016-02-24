@@ -18,7 +18,7 @@ Version  Changes
 =======  =========================================================================================================================
 1.1.1	- [TASK] changed classnames to somthing less common:
 
-			.youtube -> .vurpl-youtube, .vimeo -> vurpl-vimeo, .dailymotion -> .vurpl-dailymotion
+	.youtube -> .vurpl-youtube, .vimeo -> vurpl-vimeo, .dailymotion -> .vurpl-dailymotion
 
 
 1.1.0	- [TASK] enhance channel/user detection using API for vimeo and dailymotion
@@ -29,7 +29,7 @@ Version  Changes
 
 1.0.7   - [FEATURE] via constants configurable option to disable thumbnails to just use plain responsive iframes
 
-		- set V7.x compatibility
+	- set V7.x compatibility
 
 1.0.6   - [TASK] switch to youtube API v3 (used to fetch video title used in alt tag)
 

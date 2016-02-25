@@ -3,8 +3,8 @@ $(function() {
 	$(".vurpl-youtube").each(function() {
 		// set the videothumbnail as background
 		// maxresdefault if width > 640 else sddefault
-		if ($(this).width() > 640) $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg)');
-		else $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
+		if ($(this).width() > 640) $(this).css('background-image', 'url(https://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg)');
+		else $(this).css('background-image', 'url(https://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
 
 		// Overlay the Play icon to make it look like a video player
 		$(this).append($('<div/>', {'class': 'play'}));
@@ -52,7 +52,7 @@ $(function() {
 
 		$(document).delegate('#'+this.id, 'click', function() {
 			// Create an iFrame with autoplay set to true
-			var iframe_url = "http://www.dailymotion.com/embed/video/" + this.id + "?autoplay=1&title=0&byline=0&portrait=0";
+			var iframe_url = "https://www.dailymotion.com/embed/video/" + this.id + "?autoplay=1&title=0&byline=0&portrait=0";
 			if ($(this).data('params')) iframe_url+='&'+$(this).data('params');
 			var iframe = $('<iframe/>', {'src': iframe_url });
 			// Replace the Dailymotion thumbnail with HTML5 Player

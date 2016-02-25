@@ -56,7 +56,7 @@ class tx_brtvideourlreplace {
 				// fetch Video Title
 				$videoTitle = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title))&part=snippet"),true);
 				// thumbnail for printing
-				$replacement.= '<img class="visible-print" src="http://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['items'][0]['snippet']['title'].'">';			
+				$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['items'][0]['snippet']['title'].'">';			
 				// replace matching parts
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
@@ -68,7 +68,7 @@ class tx_brtvideourlreplace {
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// fetch Video Details from Vimeo API
-				$videoDetail = unserialize(file_get_contents("http://vimeo.com/api/v2/video/".$match[5].".php"));
+				$videoDetail = unserialize(file_get_contents("https://vimeo.com/api/v2/video/".$match[5].".php"));
 				if (is_array($videoDetail)) {
 					// search pattern
 					$pattern='#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(video/)?'.$match[5].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';				
@@ -100,7 +100,7 @@ class tx_brtvideourlreplace {
 
 
 					// iframe if thumbnail is disabled
-					if ($disableThumbnail) $replacement = '<div class="vurpl-dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="http://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
+					if ($disableThumbnail) $replacement = '<div class="vurpl-dailymotion embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.dailymotion.com/embed/video/'.$videoDetail->id.'?title=0&amp;byline=0&amp;portrait=0"></iframe></div>';
 					else $replacement = '<div class="vurpl-dailymotion embed-responsive embed-responsive-16by9 hidden-print" id="'.$videoDetail->id.'" data-thumb-large="'.$videoThumbnails->thumbnail_url .'" data-thumb-medium="'.$videoThumbnails->thumbnail_large_url.'"></div>';
 					// thumbnail for printing
 					$replacement.= '<img class="visible-print" src="'.$videoThumbnails->thumbnail_url .'" alt="Dailymotion Video: '.$videoDetail->title.'">';

@@ -16,7 +16,9 @@ ChangeLog
 =======  =========================================================================================================================
 Version  Changes
 =======  =========================================================================================================================
-1.1.1	- [TASK] changed classnames to somthing less common:
+1.2.1	- [TASK] Typo3 CMS V8.0 compatibility, more robust YT-thumbnail-URLs fetched from API
+
+1.2.0	- [TASK] changed classnames to somthing less common:
 
 	- .youtube -> .vurpl-youtube, .vimeo -> vurpl-vimeo, .dailymotion -> .vurpl-dailymotion
 

@@ -1,10 +1,7 @@
 "use strict";
 $(function() {
 	$(".vurpl-youtube").each(function() {
-		// set the videothumbnail as background
-		
-		var th_url_large = 'https://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg';
-		
+		// set the videothumbnail as background	
 		// maxresdefault/high if width > 640 else standard/high
 		if ($(this).width() > 640) var img_src = $(this).data("thumb-large");
 		else	var img_src = $(this).data("thumb-medium");

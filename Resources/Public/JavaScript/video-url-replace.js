@@ -2,9 +2,13 @@
 $(function() {
 	$(".vurpl-youtube").each(function() {
 		// set the videothumbnail as background
-		// maxresdefault if width > 640 else sddefault
-		if ($(this).width() > 640) $(this).css('background-image', 'url(https://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg)');
-		else $(this).css('background-image', 'url(https://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
+		
+		var th_url_large = 'https://i.ytimg.com/vi/' + this.id + '/maxresdefault.jpg';
+		
+		// maxresdefault/high if width > 640 else standard/high
+		if ($(this).width() > 640) var img_src = $(this).data("thumb-large");
+		else	var img_src = $(this).data("thumb-medium");
+		$(this).css('background-image', 'url(' + img_src + ')');
 
 		// Overlay the Play icon to make it look like a video player
 		$(this).append($('<div/>', {'class': 'play'}));

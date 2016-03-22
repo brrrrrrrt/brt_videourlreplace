@@ -49,14 +49,19 @@ class tx_brtvideourlreplace {
 				// search pattern
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 
+				// fetch Video Details
+				$videoDetail = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title,thumbnails))&part=snippet"),true);
+				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'])) $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'];
+				else $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
+				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'])) $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'];
+				else $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
+
 				// iframe if thumbnail is disabled
 				if ($disableThumbnail) $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
-				else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"></div>';
+				else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"  data-thumb-large="'.$thumbnail_large .'" data-thumb-medium="'.$thumbnail_medium.'"></div>';
 
-				// fetch Video Title
-				$videoTitle = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title))&part=snippet"),true);
 				// thumbnail for printing
-				$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoTitle['items'][0]['snippet']['title'].'">';			
+				$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoDetail['items'][0]['snippet']['title'].'">';			
 				// replace matching parts
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}

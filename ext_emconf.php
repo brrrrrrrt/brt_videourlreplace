@@ -12,14 +12,16 @@ $EM_CONF[$_EXTKEY] = array(
 	'author_email' => 'brt@effet.info',
 	'author_company' => 'effet webservices',
 	'state' => 'stable',
-	'internal' => '',
 	'uploadfolder' => false,
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '1.2.1',
+	'version' => '1.2.2',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '6.2.0-8.0.99',
+			'php' => '5.4.0-7.2.99',
+			'typo3' => '6.2.0-9.0.99'
 		),
+        'conflicts' => array(),
+        'suggests' => array(),
 	),
 );

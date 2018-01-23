@@ -37,6 +37,8 @@ class tx_brtvideourlreplace {
 	var $extKey = 'brt_videourlreplace';	// The extension key.
 	
 	function replace(&$objArr, $tslib_fe) {
+		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['brt_videourlreplace']);
+
 		// reference pagecontent
 		$this->content = &$objArr['pObj']->content;
 		$disableThumbnail = $GLOBALS['TSFE']->tmpl->flatSetup['plugin.brt_videourl_replace.thumbnail.disable'];
@@ -50,7 +52,7 @@ class tx_brtvideourlreplace {
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 
 				// fetch Video Details
-				$videoDetail = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0&fields=items(snippet(title,thumbnails))&part=snippet"),true);
+				$videoDetail = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=".$extConf['googleApiKey']."&fields=items(snippet(title,thumbnails))&part=snippet"),true);
 				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'])) $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'];
 				else $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
 				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'])) $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'];

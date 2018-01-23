@@ -16,6 +16,8 @@ ChangeLog
 =======  =========================================================================================================================
 Version  Changes
 =======  =========================================================================================================================
+1.2.3	- [FEATURE] add constant for Youtube API Key
+
 1.2.2	- [TASK] TYPO3 CMS V9.0 compatibility, move addStaticFile to TCA Override
 
 1.2.1	- [TASK] TYPO3 CMS V8.0 compatibility, more robust YT-thumbnail-URLs fetched from API

@@ -31,12 +31,14 @@ Video Url replace
 			- jQuery
 			- Bootstrap
 		
+		For Youtube Videos it is recommended to add your own Youtube API Key (using the Constants Editor).
+		Get your Youtube API Key here: https://developers.google.com/youtube/v3/getting-started - it's free!
 
 	:Keywords:
 		embed video thumbnail youtube vimeo dailymotion
 
 	:Copyright:
-		2015
+		2015-2018
 
 	:Author:
 		Robert Breithuber
@@ -62,8 +64,8 @@ Video Url replace
 	:glob:
 
 	Introduction/Index
-	Administrator/Index
-	Administrator/ChangeLog/Index
+	AdministratorManual/Index
 	Configuration/Index
+	AdministratorManual/ChangeLog/Index
 	KnownProblems/Index
 	Targets

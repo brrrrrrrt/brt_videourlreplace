@@ -3,3 +3,9 @@
 	page.includeCSS.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/Css/video-url-replace.css
 	page.includeJSFooterlibs.videoUrlReplace = EXT:brt_videourlreplace/Resources/Public/JavaScript/video-url-replace.js
 [global]
+
+plugin.brt_videourl_replace {
+    thumbnail.disable = {$plugin.brt_videourl_replace.thumbnail.disable}
+    disableSSL = {$plugin.brt_videourl_replace.disableSSL}
+    googleApiKey = {$plugin.brt_videourl_replace.googleApiKey}
+}

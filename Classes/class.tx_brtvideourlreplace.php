@@ -39,12 +39,12 @@ class tx_brtvideourlreplace {
 	function replace(&$objArr, $tslib_fe) {
 		// reference pagecontent
 		$this->content = &$objArr['pObj']->content;
-		$disableThumbnail = $GLOBALS['TSFE']->tmpl->flatSetup['plugin.brt_videourl_replace.thumbnail.disable'];
-		$disableSSL = $GLOBALS['TSFE']->tmpl->flatSetup['plugin.brt_videourl_replace.disableSSL'];
+		$disableThumbnail = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['thumbnail.']['disable'];
+		$disableSSL = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['disableSSL'];
 		if ($disableSSL) $schema = "http";
 		else $schema = "https";
-		$googleApiKey = $GLOBALS['TSFE']->tmpl->flatSetup['plugin.brt_videourl_replace.googleApiKey'];
-		
+		$googleApiKey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['googleApiKey'];
+
 		// Youtube
 		$matches = array();
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(?!channel)(?!user)(?!playlist)(watch\?v=|v/|embed/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);

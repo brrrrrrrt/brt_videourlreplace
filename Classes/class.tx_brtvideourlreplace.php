@@ -53,18 +53,22 @@ class tx_brtvideourlreplace {
 				// search pattern
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 				// fetch Video Details
-				$videoDetail = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=$googleApiKey&fields=items(snippet(title,thumbnails))&part=snippet"),true);
-				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'])) $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'];
-				else $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
-				if (isset($videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'])) $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'];
-				else $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
+				$videoDetail = json_decode($this->curl_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=$googleApiKey&fields=items(snippet(title,thumbnails))&part=snippet"),true);
+				if ($videoDetail['error']) $replacement = $videoDetail['error']['message'];
+				else {
+					if (isset($videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'])) $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'];
+					else $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
+					if (isset($videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'])) $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['standard']['url'];
+					else $thumbnail_medium = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];
 
-				// iframe if thumbnail is disabled
-				if ($disableThumbnail) $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
-				else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"  data-thumb-large="'.$thumbnail_large .'" data-thumb-medium="'.$thumbnail_medium.'"></div>';
+					// iframe if thumbnail is disabled
+					if ($disableThumbnail) $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
+					else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"  data-thumb-large="'.$thumbnail_large .'" data-thumb-medium="'.$thumbnail_medium.'"></div>';
 
-				// thumbnail for printing
-				$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoDetail['items'][0]['snippet']['title'].'">';			
+					// thumbnail for printing
+					$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoDetail['items'][0]['snippet']['title'].'">';			
+				}
+				
 				// replace matching parts
 				$this->content = preg_replace($pattern, $replacement, $this->content);
 			}
@@ -76,7 +80,7 @@ class tx_brtvideourlreplace {
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// fetch Video Details from Vimeo API
-				$videoDetail = unserialize(file_get_contents($schema."://vimeo.com/api/v2/video/".$match[5].".php"));
+				$videoDetail = unserialize($this->curl_get_contents($schema."://vimeo.com/api/v2/video/".$match[5].".php"));
 
 				if (is_array($videoDetail)) {
 					// search pattern
@@ -101,9 +105,9 @@ class tx_brtvideourlreplace {
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
 				// fetch Video Details from Dailymotion API:
-				$videoDetail = json_decode(file_get_contents("https://api.dailymotion.com/video/".$match[5]));
+				$videoDetail = json_decode($this->curl_get_contents("https://api.dailymotion.com/video/".$match[5]));
 				if (is_object($videoDetail)) {
-					$videoThumbnails=json_decode(file_get_contents("https://api.dailymotion.com/video/".$videoDetail->id."?fields=thumbnail_large_url,thumbnail_url"));
+					$videoThumbnails=json_decode($this->curl_get_contents("https://api.dailymotion.com/video/".$videoDetail->id."?fields=thumbnail_large_url,thumbnail_url"));
 					# make thumbnail urls scheme-neutral:
 					$thumbnail = preg_replace('#http://#','//',$videoThumbnails->thumbnail_url);
 					$thumbnailLarge = preg_replace('#http://#','//',$videoThumbnails->thumbnail_large_url);
@@ -123,6 +127,18 @@ class tx_brtvideourlreplace {
 		}
 		
 	}
+	function curl_get_contents ($url) {
+		if (!function_exists('curl_init')){ 
+			return file_get_contents($url);
+		}
+		$cr = curl_init();
+		curl_setopt($cr, CURLOPT_URL, $url);
+		curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+		$o = curl_exec($cr);
+		curl_close($cr);
+		return $o;
+	}
+
 }
 
 

@@ -11,8 +11,10 @@ plugin.brt_videourl_replace {
             # cat=Video URL replace Settings/760/a; type=boolean; label=Disable Thumbnails:will insert iframe instead of thumbnail
             disable = 0
     }
-    # cat=Video URL replace Settings/760/b; type=boolean; label=Disable SSL for API calls :effects only Vimeo, as Youtube and Dailymotion do not work with http anymore
+    # cat=Video URL replace Settings/760/b; type=string; label=list of stopwords (commaseperated) will be excluded from replacement
+	stopWords = /about,/intl/,/feed/,/channel/    
+    # cat=Video URL replace Settings/760/c; type=boolean; label=Disable SSL for API calls :effects only Vimeo, as Youtube and Dailymotion do not work with http anymore
     disableSSL = 0
-    # cat=Video URL replace Settings/760/c; type=string; label=Youtube API Key :get it here: https://developers.google.com/youtube/v3/getting-started - you should use your own API Key!
+    # cat=Video URL replace Settings/760/d; type=string; label=Youtube API Key :get it here: https://developers.google.com/youtube/v3/getting-started - you should use your own API Key!
     googleApiKey = AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0
 }

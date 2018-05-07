@@ -6,6 +6,7 @@
 
 plugin.brt_videourl_replace {
     thumbnail.disable = {$plugin.brt_videourl_replace.thumbnail.disable}
+    stopWords = {$plugin.brt_videourl_replace.stopWords}
     disableSSL = {$plugin.brt_videourl_replace.disableSSL}
     googleApiKey = {$plugin.brt_videourl_replace.googleApiKey}
 }

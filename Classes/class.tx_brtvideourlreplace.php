@@ -44,17 +44,22 @@ class tx_brtvideourlreplace {
 		if ($disableSSL) $schema = "http";
 		else $schema = "https";
 		$googleApiKey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['googleApiKey'];
+		$stopWords = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['stopWords'];
 
 		// Youtube
 		$matches = array();
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(?!channel)(?!user)(?!playlist)(watch\?v=|v/|embed/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
+			$swa=array();
+			foreach (explode(',',$stopWords) as $sw) $swa[] = trim($sw);
+			$stopWords=implode('|',$swa);
 			foreach ($matches as $match) {
+				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
 				// search pattern
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
 				// fetch Video Details
 				$videoDetail = json_decode($this->curl_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=$googleApiKey&fields=items(snippet(title,thumbnails))&part=snippet"),true);
-				if ($videoDetail['error']) $replacement = $videoDetail['error']['message'];
+				if ($videoDetail['error']) $replacement = $videoDetail['error']['message']." - ".$videoDetail['error']['errors'][0]['reason'];
 				else {
 					if (isset($videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'])) $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['maxres']['url'];
 					else $thumbnail_large = $videoDetail['items'][0]['snippet']['thumbnails']['high']['url'];

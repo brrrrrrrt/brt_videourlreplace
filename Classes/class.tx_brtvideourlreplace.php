@@ -84,7 +84,7 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(?!user)(?!tag)(?!categories)(?!channels)(?!groups)(video/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
-				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
+				if ((preg_match('#'.$stopWords.'#',$match[5])) || (preg_match('#'.$stopWords.'#',$match[6]))) continue;
 				// fetch Video Details from Vimeo API
 				$videoDetail = unserialize($this->curl_get_contents($schema."://vimeo.com/api/v2/video/".$match[5].".php"));
 
@@ -110,7 +110,7 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?([a-zA-Z0-9-_]*)(?!/featured)(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
-				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
+				if ((preg_match('#'.$stopWords.'#',$match[5])) || (preg_match('#'.$stopWords.'#',$match[6]))) continue;
 				// fetch Video Details from Dailymotion API:
 				$videoDetail = json_decode($this->curl_get_contents("https://api.dailymotion.com/video/".$match[5]));
 				if (is_object($videoDetail)) {

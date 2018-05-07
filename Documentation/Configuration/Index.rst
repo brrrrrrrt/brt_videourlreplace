@@ -19,6 +19,10 @@ Configuration Reference
 
 	**it cannot be guaranteed that the provided default key will always work, so you should really use your own!**
 
+- the default list of stopwords is: */about,/intl/,/feed/,/channel/* you are able to change this via contants editor or by adding this to your contants:
+
+	 plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/,/my-exclusion-example/
+
 - you can disable the use of thumbnails via contants editor or by adding this to your contants:
 
     plugin.brt_videourl_replace.thumbnail.disable = 1

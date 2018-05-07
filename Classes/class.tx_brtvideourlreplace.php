@@ -45,14 +45,14 @@ class tx_brtvideourlreplace {
 		else $schema = "https";
 		$googleApiKey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['googleApiKey'];
 		$stopWords = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['stopWords'];
-
+		$swa=array();
+		foreach (explode(',',$stopWords) as $sw) $swa[] = trim($sw);
+		$stopWords=implode('|',$swa);
+			
 		// Youtube
 		$matches = array();
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(?!channel)(?!user)(?!playlist)(watch\?v=|v/|embed/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
-			$swa=array();
-			foreach (explode(',',$stopWords) as $sw) $swa[] = trim($sw);
-			$stopWords=implode('|',$swa);
 			foreach ($matches as $match) {
 				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
 				// search pattern
@@ -84,6 +84,7 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(player\.)?vimeo.com/(?!user)(?!tag)(?!categories)(?!channels)(?!groups)(video/)?([a-zA-Z0-9-_]*)(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
+				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
 				// fetch Video Details from Vimeo API
 				$videoDetail = unserialize($this->curl_get_contents($schema."://vimeo.com/api/v2/video/".$match[5].".php"));
 
@@ -109,6 +110,7 @@ class tx_brtvideourlreplace {
 		preg_match_all('#(<p>)?\s*<a href="http(s)?://(www\.)?dailymotion.com/(video/|embed/video/)?([a-zA-Z0-9-_]*)(?!/featured)(&.*|\?.*|/.*|_.*)?"(.*?)</a>\s*(</p>)?#', $this->content, $matches, PREG_SET_ORDER);
 		if (isset($matches[0])) {
 			foreach ($matches as $match) {
+				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
 				// fetch Video Details from Dailymotion API:
 				$videoDetail = json_decode($this->curl_get_contents("https://api.dailymotion.com/video/".$match[5]));
 				if (is_object($videoDetail)) {

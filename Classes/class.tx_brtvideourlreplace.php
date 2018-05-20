@@ -45,6 +45,7 @@ class tx_brtvideourlreplace {
 		else $schema = "https";
 		$googleApiKey = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['googleApiKey'];
 		$stopWords = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['stopWords'];
+		$globalYoutubeParams = $GLOBALS['TSFE']->tmpl->setup['plugin.']['brt_videourl_replace.']['globalYoutubeParams'];
 		$swa=array();
 		foreach (explode(',',$stopWords) as $sw) $swa[] = trim($sw);
 		$stopWords=implode('|',$swa);
@@ -57,6 +58,8 @@ class tx_brtvideourlreplace {
 				if ((preg_match('#'.$stopWords.'#',$match[6])) || (preg_match('#'.$stopWords.'#',$match[7]))) continue;
 				// search pattern
 				$pattern='#(<p>)?\s*<a href="http(s)?://(www\.)?(youtube.com|youtu.be)/(watch\?v=|v/|embed/)?'.$match[6].'(&.*|\?.*|/.*)?"(.*?)</a>\s*(</p>)?#';
+				$youtubeParams = preg_replace('/[^a-zA-Z]*/','',preg_replace('/(\'|").*/','',preg_replace('/&amp;amp;/','&',$match[7])),1);
+				if ($youtubeParams == '') $youtubeParams = $globalYoutubeParams;
 				// fetch Video Details
 				$videoDetail = json_decode($this->curl_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$match[6]."&key=$googleApiKey&fields=items(snippet(title,thumbnails))&part=snippet"),true);
 				if ($videoDetail['error']) $replacement = $videoDetail['error']['message']." - ".$videoDetail['error']['errors'][0]['reason'];
@@ -68,7 +71,7 @@ class tx_brtvideourlreplace {
 
 					// iframe if thumbnail is disabled
 					if ($disableThumbnail) $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print"><iframe src="https://www.youtube.com/embed/'.$match[6].'?autohide=1"></iframe></div>';
-					else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'"  data-thumb-large="'.$thumbnail_large .'" data-thumb-medium="'.$thumbnail_medium.'"></div>';
+					else $replacement = '<div class="vurpl-youtube embed-responsive embed-responsive-16by9 hidden-print" id="'.$match[6].'" data-params="'.$youtubeParams.'" data-thumb-large="'.$thumbnail_large .'" data-thumb-medium="'.$thumbnail_medium.'"></div>';
 
 					// thumbnail for printing
 					$replacement.= '<img class="visible-print" src="https://i.ytimg.com/vi/'.$match[6].'/maxresdefault.jpg" alt="Youtube Video: '.$videoDetail['items'][0]['snippet']['title'].'">';			

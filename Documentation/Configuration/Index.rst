@@ -13,7 +13,7 @@ Configuration Reference
 
 - include Static Template "Video URL Replace (brt_videourlreplace)" into your Root Template
 
-- it is recommended to use your own Youtube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
+- it is recommended to use your own YouTube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
 
 	plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
 
@@ -23,13 +23,21 @@ Configuration Reference
 
 	 plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/,/my-exclusion-example/
 
-- you can disable the use of thumbnails via contants editor or by adding this to your contants:
+- disable the use of thumbnails via contants editor or by adding this to your contants:
 
     plugin.brt_videourl_replace.thumbnail.disable = 1
 
 	(when thumbnails are disabled, URLs get replaced directly by iframes, no additional CSS or jQuery is used - in this case the static template inclusion in your root template will have no effect)
 
-- you can make API Calls to Vimeo (serverside) non-SSL by setting: 
+- define global "default" Parameters for the YouTube Player:
+
+	plugin.brt_videourl_replace.globalYoutubeParams = showinfo=0&rel=0&controls=0&iv_load_policy=3
+	
+	See: https://developers.google.com/youtube/player_parameters
+	
+	**If the URL of the YouTube Video contains parameters, the global parameters will be ignored and only the parameters added to the video URL will be used.**
+
+- make API Calls to Vimeo (serverside) non-SSL: 
 
 	plugin.brt_videourl_replace.disableSSL = 1
 	
@@ -46,8 +54,11 @@ Constants:
 	plugin.brt_videourl_replace.googleApiKey = <default key is unrestriced but should not be used>
 	
 	plugin.brt_videourl_replace.thumbnail.disable = 0
+	
+	plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/
 
 	plugin.brt_videourl_replace.disableSSL = 0
+	
 	
 
 

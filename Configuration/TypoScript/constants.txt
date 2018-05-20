@@ -17,4 +17,6 @@ plugin.brt_videourl_replace {
     disableSSL = 0
     # cat=Video URL replace Settings/760/d; type=string; label=Youtube API Key :get it here: https://developers.google.com/youtube/v3/getting-started - you should use your own API Key!
     googleApiKey = AIzaSyChbhZ8-kY1tL75bw4gtY3KKYfPJOvEMS0
+    # cat=Video URL replace Settings/760/e; type=string; label=Global Youtube Parameters
+    globalYoutubeParams = rel=0&showinfo=0
 }

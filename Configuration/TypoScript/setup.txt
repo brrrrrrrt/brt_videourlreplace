@@ -9,4 +9,5 @@ plugin.brt_videourl_replace {
     stopWords = {$plugin.brt_videourl_replace.stopWords}
     disableSSL = {$plugin.brt_videourl_replace.disableSSL}
     googleApiKey = {$plugin.brt_videourl_replace.googleApiKey}
+    globalYoutubeParams = {$plugin.brt_videourl_replace.globalYoutubeParams}
 }

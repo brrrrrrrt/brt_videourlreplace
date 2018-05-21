@@ -54,6 +54,10 @@ TypoScript Reference
   plugin.brt_videourl_replace.googleApiKey = <default key is unrestriced but should not be used>
 	
   plugin.brt_videourl_replace.thumbnail.disable = 0
+  
+  plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/,/my-exclusion-example/
+  
+  plugin.brt_videourl_replace.globalYoutubeParams = showinfo=0&rel=0&controls=0&iv_load_policy=3
 
   plugin.brt_videourl_replace.disableSSL = 0
 	

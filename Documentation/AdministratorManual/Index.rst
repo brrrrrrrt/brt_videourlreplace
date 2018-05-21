@@ -33,7 +33,7 @@ To install the extension, perform the following steps:
 Configuration
 -------------
 
-* Currtently the extension has no configuration options.
+* All configuration can be done via constants editor.
 
 .. _admin-faq:
 

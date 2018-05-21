@@ -15,9 +15,9 @@ Configuration Reference
 
 - it is recommended to use your own YouTube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
 
-	plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
+plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
 
-	**it cannot be guaranteed that the provided default key will always work, so you should really use your own!**
+**it cannot be guaranteed that the provided default key will always work, so you should really use your own!**
 
 - the default list of stopwords is: */about,/intl/,/feed/,/channel/* you are able to change this via contants editor or by adding this to your contants:
 

@@ -49,7 +49,7 @@ Configuration Reference
 TypoScript Reference
 --------------------
 
-Constants:
+- Constants:
 
   plugin.brt_videourl_replace.googleApiKey = <default key is unrestriced but should not be used>
 	
@@ -63,10 +63,10 @@ Constants:
 
 
 
-Setup:
+- Setup:
 
-If you want to use your own JavaScript / CSS,
-add this to your page object:
+  If you want to use your own JavaScript / CSS,
+  add this to your page object:
 
   includeCSS.videoUrlReplace = path/to/your.css
 	

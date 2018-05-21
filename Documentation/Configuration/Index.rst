@@ -13,7 +13,7 @@ Configuration Reference
 
 - include Static Template "Video URL Replace (brt_videourlreplace)" into your Root Template
 
-- it is recommended to use your own YouTube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
+- it is recommended to use your own Youtube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
 
   plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
 
@@ -23,7 +23,7 @@ Configuration Reference
 
   plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/,/my-exclusion-example/
 
-- disable the use of thumbnails via contants editor or by adding this to your contants:
+- you can disable the use of thumbnails via contants editor or by adding this to your contants:
 
   plugin.brt_videourl_replace.thumbnail.disable = 1
 
@@ -35,13 +35,9 @@ Configuration Reference
 	
   See: https://developers.google.com/youtube/player_parameters
 	
-<<<<<<< HEAD
-	**If the URL of the YouTube Video contains parameters, the global parameters will be ignored and the parameters from the video URL will be used instead.**
-=======
-  **If the URL of the YouTube Video contains parameters, the global parameters will be ignored and only the parameters added to the video URL will be used.**
->>>>>>> ab7c1d3a3dfed5b4636c3874ccd0bc5ddb869b0a
+  **If the URL of the YouTube Video contains parameters, the global parameters will be ignored and the parameters from the video URL will be used instead.**
 
-- make API Calls to Vimeo (serverside) non-SSL: 
+- you can make API Calls to Vimeo (serverside) non-SSL by setting: 
 
   plugin.brt_videourl_replace.disableSSL = 1
 	
@@ -58,11 +54,8 @@ TypoScript Reference
   plugin.brt_videourl_replace.googleApiKey = <default key is unrestriced but should not be used>
 	
   plugin.brt_videourl_replace.thumbnail.disable = 0
-	
-  plugin.brt_videourl_replace.stopWords = /about,/intl/,/feed/,/channel/
 
   plugin.brt_videourl_replace.disableSSL = 0
-	
 	
 
 
@@ -75,6 +68,5 @@ TypoScript Reference
   includeCSS.videoUrlReplace = path/to/your.css
 	
   includeJSFooterlibs.videoUrlReplace = path/to/your.js
-
 
 

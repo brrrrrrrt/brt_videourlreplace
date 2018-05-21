@@ -15,7 +15,7 @@ Configuration Reference
 
 - it is recommended to use your own YouTube API Key, it's free, get it here: https://developers.google.com/youtube/v3/getting-started
 
-plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
+  plugin.brt_videourl_replace.googleApiKey = your_youtube_api_key
 
 **it cannot be guaranteed that the provided default key will always work, so you should really use your own!**
 

@@ -16,6 +16,12 @@ ChangeLog
 =======  =========================================================================================================================
 Version  Changes
 =======  =========================================================================================================================
+1.2.6	- [FEATURE] Youtube Player parameters (global, per video)
+
+1.2.5	- [FEATURE] add list of stopwords configurable via typoscript constants
+
+1.2.4	- [FEATURE] prefer curl for fetching meta data if available
+
 1.2.3	- [FEATURE] add constant for Youtube API Key
 
 1.2.2	- [TASK] TYPO3 CMS V9.0 compatibility, move addStaticFile to TCA Override

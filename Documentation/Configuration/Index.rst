@@ -35,7 +35,7 @@ Configuration Reference
 	
 	See: https://developers.google.com/youtube/player_parameters
 	
-	**If the URL of the YouTube Video contains parameters, the global parameters will be ignored and only the parameters added to the video URL will be used.**
+	**If the URL of the YouTube Video contains parameters, the global parameters will be ignored and the parameters from the video URL will be used instead.**
 
 - make API Calls to Vimeo (serverside) non-SSL: 
 
